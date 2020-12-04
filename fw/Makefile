@@ -2,14 +2,21 @@ PROJECT = hydro
 BUILD_DIR = bin
 
 SRC := ./src
+INC := ./inc
 LBS := ./lib
+
+# C Source Files
 CFILES = $(wildcard $(SRC)/*.c)
 CFILES += $(wildcard $(LBS)/freertos/*.c)
+
+# Cpp Source Files
+CPPFILES = $(wildcard $(SRC)/*.cpp)
+
+# Inclues
 INCLUDES += -I$(SRC)
 INCLUDES += -I$(LBS)/freertos
-# INCLUDES += -I$(LBS)/libopencm3
+INCLUDES += -I$(INC)
 
-# TODO - you will need to edit these two lines!
 DEVICE=stm32f103c8t6
 OOCD_FILE = interface/stlink.cfg 
 

@@ -4,21 +4,21 @@
 # OPENCM3_DIR - duh
 # PROJECT - will be the basename of the output elf, eg usb-gadget0-stm32f4disco
 # CFILES - basenames only, eg main.c blah.c
-# CXXFILES - same for C++ files. Must have cxx suffix!
+# CPPFILES - same for C++ files. Must have cpp suffix!
 # DEVICE - the full device name, eg stm32f405ret6
 #  _or_
 # LDSCRIPT - full path, eg ../../examples/stm32/f4/stm32f4-discovery/stm32f4-discovery.ld
 # OPENCM3_LIB - the basename, eg: opencm3_stm32f4
 # OPENCM3_DEFS - the target define eg: -DSTM32F4
 # ARCH_FLAGS - eg, -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16
-#    (ie, the full set of cpu arch flags, _none_ are defined in this file)
+# (ie, the full set of cpu arch flags, _none_ are defined in this file)
 #
 ### OPTIONAL ###
 # INCLUDES - fully formed -I paths, if you want extra, eg -I../shared
 # BUILD_DIR - defaults to bin, should set this if you are building multiarch
 # OPT - full -O flag, defaults to -Os
 # CSTD - defaults -std=c99
-# CXXSTD - no default.
+# CPPSTD - no default.
 # OOCD_INTERFACE - eg stlink-v2
 # OOCD_TARGET - eg stm32f4x
 #    both only used if you use the "make flash" target.
@@ -47,7 +47,7 @@ endif
 # Tool paths.
 PREFIX	?= arm-none-eabi-
 CC	= $(PREFIX)gcc
-CXX	= $(PREFIX)g++
+CPP	= $(PREFIX)g++
 LD	= $(PREFIX)gcc
 OBJCOPY	= $(PREFIX)objcopy
 OBJDUMP	= $(PREFIX)objdump
@@ -59,7 +59,7 @@ OPENCM3_INC = $(OPENCM3_DIR)/include
 INCLUDES += $(patsubst %,-I%, . $(OPENCM3_INC) )
 
 OBJS = $(CFILES:%.c=$(BUILD_DIR)/%.o)
-OBJS += $(CXXFILES:%.cxx=$(BUILD_DIR)/%.o)
+OBJS += $(CPPFILES:%.cpp=$(BUILD_DIR)/%.o)
 OBJS += $(AFILES:%.S=$(BUILD_DIR)/%.o)
 GENERATED_BINS = $(PROJECT).elf $(PROJECT).bin $(PROJECT).map $(PROJECT).list $(PROJECT).lss
 
@@ -74,11 +74,11 @@ TGT_CFLAGS += -ffunction-sections -fdata-sections
 TGT_CFLAGS += -Wextra -Wshadow -Wno-unused-variable -Wimplicit-function-declaration
 TGT_CFLAGS += -Wredundant-decls -Wstrict-prototypes -Wmissing-prototypes
 
-TGT_CXXFLAGS += $(OPT) $(CXXSTD) -ggdb3
-TGT_CXXFLAGS += $(ARCH_FLAGS)
-TGT_CXXFLAGS += -fno-common
-TGT_CXXFLAGS += -ffunction-sections -fdata-sections
-TGT_CXXFLAGS += -Wextra -Wshadow -Wredundant-decls  -Weffc++
+TGT_CPPFLAGS += $(OPT) $(CPPSTD) -ggdb3
+TGT_CPPFLAGS += $(ARCH_FLAGS)
+TGT_CPPFLAGS += -fno-common -fno-rtti
+TGT_CPPFLAGS += -ffunction-sections -fdata-sections
+TGT_CPPFLAGS += -Wextra -Wshadow -Wredundant-decls  -Weffc++
 
 TGT_ASFLAGS += $(OPT) $(ARCH_FLAGS) -ggdb3
 
@@ -97,12 +97,12 @@ ifeq (,$(DEVICE))
 LDLIBS += -l$(OPENCM3_LIB)
 endif
 # nosys is only in newer gcc-arm-embedded...
-#LDLIBS += -specs=nosys.specs
+LDLIBS += -specs=nosys.specs
 LDLIBS += -Wl,--start-group -lc -lgcc -lnosys -Wl,--end-group
 
 # Burn in legacy hell fortran modula pascal yacc idontevenwat
 .SUFFIXES:
-.SUFFIXES: .c .S .h .o .cxx .elf .bin .list .lss
+.SUFFIXES: .c .S .h .o .cpp .elf .bin .list .lss
 
 # Bad make, never *ever* try to get a file out of source control by yourself.
 %: %,v
@@ -131,10 +131,10 @@ $(BUILD_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
 	$(Q)$(CC) $(TGT_CFLAGS) $(CFLAGS) $(TGT_CPPFLAGS) $(CPPFLAGS) -o $@ -c $<
 
-$(BUILD_DIR)/%.o: %.cxx
-	@printf "  CXX\t$<\n"
+$(BUILD_DIR)/%.o: %.cpp
+	@printf "  CPP\t$<\n"
 	@mkdir -p $(dir $@)
-	$(Q)$(CXX) $(TGT_CXXFLAGS) $(CXXFLAGS) $(TGT_CPPFLAGS) $(CPPFLAGS) -o $@ -c $<
+	$(Q)$(CPP) $(TGT_CPPFLAGS) $(CPPFLAGS) $(TGT_CPPFLAGS) $(CPPFLAGS) -o $@ -c $<
 
 $(BUILD_DIR)/%.o: %.S
 	@printf "  AS\t$<\n"
