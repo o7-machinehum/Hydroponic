@@ -63,9 +63,9 @@ OBJS += $(CPPFILES:%.cpp=$(BUILD_DIR)/%.o)
 OBJS += $(AFILES:%.S=$(BUILD_DIR)/%.o)
 GENERATED_BINS = $(PROJECT).elf $(PROJECT).bin $(PROJECT).map $(PROJECT).list $(PROJECT).lss
 
-TGT_CPPFLAGS += -MD
-TGT_CPPFLAGS += -Wall -Wundef $(INCLUDES)
-TGT_CPPFLAGS += $(INCLUDES) $(OPENCM3_DEFS)
+TGT_CFLAGS += -MD
+TGT_CFLAGS += -Wall -Wundef $(INCLUDES)
+TGT_CFLAGS += $(INCLUDES) $(OPENCM3_DEFS)
 
 TGT_CFLAGS += $(OPT) $(CSTD) -ggdb3
 TGT_CFLAGS += $(ARCH_FLAGS)
@@ -73,6 +73,10 @@ TGT_CFLAGS += -fno-common
 TGT_CFLAGS += -ffunction-sections -fdata-sections
 TGT_CFLAGS += -Wextra -Wshadow -Wno-unused-variable -Wimplicit-function-declaration
 TGT_CFLAGS += -Wredundant-decls -Wstrict-prototypes -Wmissing-prototypes
+
+TGT_CPPFLAGS += -MD
+TGT_CPPFLAGS += -Wall -Wundef $(INCLUDES)
+TGT_CPPFLAGS += $(INCLUDES) $(OPENCM3_DEFS)
 
 TGT_CPPFLAGS += $(OPT) $(CPPSTD) -ggdb3
 TGT_CPPFLAGS += $(ARCH_FLAGS)
@@ -86,6 +90,7 @@ TGT_LDFLAGS += -T$(LDSCRIPT) -L$(OPENCM3_DIR)/lib -nostartfiles
 TGT_LDFLAGS += $(ARCH_FLAGS)
 TGT_LDFLAGS += -specs=nano.specs
 TGT_LDFLAGS += -Wl,--gc-sections
+
 # OPTIONAL
 #TGT_LDFLAGS += -Wl,-Map=$(PROJECT).map
 ifeq ($(V),99)
@@ -129,12 +134,12 @@ endif
 $(BUILD_DIR)/%.o: %.c
 	@printf "  CC\t$<\n"
 	@mkdir -p $(dir $@)
-	$(Q)$(CC) $(TGT_CFLAGS) $(CFLAGS) $(TGT_CPPFLAGS) $(CPPFLAGS) -o $@ -c $<
+	$(Q)$(CC) $(CFLAGS) $(TGT_CFLAGS) -o $@ -c $<
 
 $(BUILD_DIR)/%.o: %.cpp
 	@printf "  CPP\t$<\n"
 	@mkdir -p $(dir $@)
-	$(Q)$(CPP) $(TGT_CPPFLAGS) $(CPPFLAGS) $(TGT_CPPFLAGS) $(CPPFLAGS) -o $@ -c $<
+	$(Q)$(CPP) $(TGT_CPPFLAGS) $(CPPFLAGS) -o $@ -c $<
 
 $(BUILD_DIR)/%.o: %.S
 	@printf "  AS\t$<\n"

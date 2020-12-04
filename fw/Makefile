@@ -18,6 +18,7 @@ INCLUDES += -I$(LBS)/freertos
 INCLUDES += -I$(INC)
 
 DEVICE=stm32f103c8t6
+OPENCM3_DEFS+=-DSTM32F1
 OOCD_FILE = interface/stlink.cfg 
 
 # You shouldn't have to edit anything below here.
