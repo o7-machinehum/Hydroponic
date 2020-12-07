@@ -4,6 +4,7 @@
 // #include "stddef.h"
 // #include "iostream.h"
 #include "cmd.h"
+#include "uart.h"
 // #include "strstream.h"
 // #include "ctype.h"
 
@@ -11,16 +12,18 @@ class CLI
 {
     const char* prompt;
     void getLine(char* buf, size_t len);
+    uart* uartx;
 
-    public:
+public:
     void present(Cmd *menu[0]);
-    CLI(const char *p)
-    :prompt(p){}
+    CLI(const char *p, uart* u)
+    :prompt(p), uartx(u){}
 };
 
 void CLI::present(Cmd *menu[]){
     while(true){
         // print: prompt
+        uartx->send('f');
         char buf[80];
         getLine(buf, sizeof(buf));
 

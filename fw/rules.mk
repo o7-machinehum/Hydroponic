@@ -48,7 +48,7 @@ endif
 PREFIX	?= arm-none-eabi-
 CC	= $(PREFIX)gcc
 CPP	= $(PREFIX)g++
-LD	= $(PREFIX)gcc
+LD	= $(PREFIX)g++
 OBJCOPY	= $(PREFIX)objcopy
 OBJDUMP	= $(PREFIX)objdump
 OOCD	?= openocd
@@ -89,7 +89,7 @@ TGT_ASFLAGS += $(OPT) $(ARCH_FLAGS) -ggdb3
 TGT_LDFLAGS += -T$(LDSCRIPT) -L$(OPENCM3_DIR)/lib -nostartfiles
 TGT_LDFLAGS += $(ARCH_FLAGS)
 TGT_LDFLAGS += -specs=nano.specs
-TGT_LDFLAGS += -Wl,--gc-sections
+TGT_LDFLAGS += -Wl,--gc-sections 
 
 # OPTIONAL
 #TGT_LDFLAGS += -Wl,-Map=$(PROJECT).map
