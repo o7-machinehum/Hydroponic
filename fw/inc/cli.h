@@ -1,18 +1,17 @@
 #ifndef CMDPROC_H 
 #define CMDPROC_H
 
-// #include "stddef.h"
-// #include "iostream.h"
 #include "cmd.h"
 #include "uart.h"
-// #include "strstream.h"
-// #include "ctype.h"
 
 class CLI
 {
     const char* prompt;
     void getLine(char* buf, size_t len);
     uart* uartx;
+
+    CLI( const CLI& );            // non construction-copyable
+    CLI& operator=( const CLI& ); // non copyable
 
 public:
     void present(Cmd *menu[0]);
@@ -21,62 +20,41 @@ public:
 };
 
 void CLI::present(Cmd *menu[]){
+    char buf[80];
+    int i(0);
+    uartx->send("Turnip CLI V0.1\r\n");
+    uartx->send("> ");
     while(true){
-        // print: prompt
-        uartx->send('f');
-        char buf[80];
-        getLine(buf, sizeof(buf));
+        buf[i] = uartx->getch(); // Get input
+        uartx->send(buf[i]);     // Send back
+        i++;
 
-        if(buf[0] != 0){
-            const char* msg = "unknown command";
-            for(Cmd** p(menu) ; *p ; p++){
+        // Check for newline
+        if(buf[i-1] == '\r') {
+            uartx->send('\n');
 
+            // Figure out which command it is!
+            for(Cmd** p(menu) ; *p ; p++) {
                 if((*p)->match(buf)){
-                    msg = (*p)->parse(buf);
+                    (*p)->parse(buf); // Run the command
                     break;
                 }
             }
-            // if(msg) Print msg if we get here.
-            //     os << msg;
-        }
-    }
-}
 
-void CLI::getLine(char* buf, size_t len)
-{
-//     istream is(sbuf);
-//     ostream os(sbuf);
-// 
-//     char* bp = &buf[0];
-//     char* ep = &buf[len - 1];
-// 
-//     while (true)
-//     {
-//         int c = is.get();
-//         switch (c)
-//         {
-//             case '\r':
-//             case '\n':
-//                 *bp = 0;
-//                 return;
-// 
-//             case 'H' - 0x40:
-//                 if (bp > buf)
-//                 {
-//                     os << "\b \b" << flush;
-//                     --bp;
-//                 }
-//                 break;
-// 
-//             default:
-//                 if (isprint(c) && bp < ep)
-//                 {
-//                     os << char(c) << flush;
-//                     *bp++ = c;
-//                 }
-//                 break;
-//         }
-//     }
+            // Zero the shit out
+            while(i--)
+                buf[i] = 0;
+            i = 0;
+            uartx->send("> ");
+        }
+
+        // Backspaces
+        // if(buf[i-1] == 8) {
+        //     uartx->send('\b');
+        //     i -= 1;
+        //     buf[i] = 0;
+        // }
+    }
 }
 
 #endif

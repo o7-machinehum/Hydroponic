@@ -1,20 +1,25 @@
 #ifndef HELLOCMD_H 
 #define HELLOCMD_H
 
-// #include "iostream.h"
 #include "cmd.h"
+#include "uart.h"
 
 class HelloCmd: public Cmd
 {
-  virtual const char* parse(char* intput){
-    // print something
-    // os << endl << "Hello World!";
-    return(0);
-  }
-  
-  public:
-  HelloCmd(const char* name)
-  :Cmd(name){}
+    uart* uartx;
+    virtual const char* parse(char* input){
+        uartx->send("Hello youself! \r\n");
+        uartx->send(input); 
+        uartx->send("\r\n");
+        return(0);
+    }
+    
+    HelloCmd( const HelloCmd& );            // non construction-copyable
+    HelloCmd& operator=( const HelloCmd& ); // non copyable
+    
+    public:
+    HelloCmd(const char* cmd_name, uart* u)
+    :Cmd(cmd_name), uartx(u){}
 };
 
 #endif

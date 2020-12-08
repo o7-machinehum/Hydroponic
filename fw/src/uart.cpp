@@ -3,7 +3,7 @@
 #include <libopencm3/stm32/usart.h>
 
 
-uart::uart(){
+uart::uart() {
     gpio_set_mode(GPIOA, GPIO_MODE_OUTPUT_50_MHZ,
               GPIO_CNF_OUTPUT_ALTFN_PUSHPULL, GPIO_USART1_TX);
     
@@ -22,10 +22,20 @@ uart::uart(){
     usart_enable(USART1);
 }
 
-uart::~uart(){
+uart::~uart() {
+    // lol
 }
 
-
-void uart::send(char c){
+void uart::send(char c) {
     usart_send_blocking(USART1, c);
+}
+
+void uart::send(const char* str) {
+    while(*str) {
+        usart_send_blocking(USART1, *str++);
+    }
+}
+
+char uart::getch() {
+    return usart_recv_blocking(USART1);
 }

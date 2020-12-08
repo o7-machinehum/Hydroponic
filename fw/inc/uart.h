@@ -8,5 +8,7 @@ public:
     ~uart();
 
     void send(char c);
+    void send(const char* str);
+    char getch();
 };
 #endif

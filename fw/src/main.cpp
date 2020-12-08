@@ -40,7 +40,7 @@ void cli_task(void * parameters) {
     CLI cli("CMD> ", uart1);
 
     Cmd* menu[] = {
-        new HelloCmd("hello"),
+        new HelloCmd("hello", uart1),
         0
     };
     
