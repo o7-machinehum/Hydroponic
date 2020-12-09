@@ -9,8 +9,8 @@ class HelloCmd: public Cmd
     uart* uartx;
     virtual const char* parse(char* input){
         uartx->send("Hello youself! \r\n");
-        uartx->send(input); 
-        uartx->send("\r\n");
+        // uartx->send(input); 
+        // uartx->send("\r\n");
         return(0);
     }
     
