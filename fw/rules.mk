@@ -82,7 +82,7 @@ TGT_CPPFLAGS += $(OPT) $(CPPSTD) -ggdb3
 TGT_CPPFLAGS += $(ARCH_FLAGS)
 TGT_CPPFLAGS += -fno-common -fno-rtti
 TGT_CPPFLAGS += -ffunction-sections -fdata-sections
-TGT_CPPFLAGS += -Wextra -Wshadow -Wredundant-decls  -Weffc++ -Wno-unused-variable -Wno-unused-parameter 
+TGT_CPPFLAGS += -Wextra -Wredundant-decls  -Weffc++ -Wno-unused-variable -Wno-unused-parameter 
 
 TGT_ASFLAGS += $(OPT) $(ARCH_FLAGS) -ggdb3
 
