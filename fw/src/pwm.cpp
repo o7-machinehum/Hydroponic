@@ -3,8 +3,9 @@
 #include <libopencm3/stm32/gpio.h>
 #include <libopencm3/stm32/timer.h>
 
-pwm::pwm(uint32_t port, uint16_t pin, uint32_t tim, uint32_t period, float duc) 
-: tim(tim), period(period)
+// Period in uS
+pwm::pwm(uint32_t port, uint16_t pin, uint32_t tim, uint32_t freq, float duc, uint32_t sysclk) 
+: tim(tim), freq(freq), clk(sysclk)
 {
     rcc_periph_clock_enable(RCC_TIM1);
     rcc_periph_clock_enable(RCC_GPIOA);
@@ -19,7 +20,7 @@ pwm::pwm(uint32_t port, uint16_t pin, uint32_t tim, uint32_t period, float duc)
     timer_enable_oc_output(tim, TIM_OC1);
     timer_enable_break_main_output(tim);
     set_duc(duc);
-    set_period(period);
+    set_freq(freq);
 }
 
 pwm::~pwm() {
@@ -28,12 +29,12 @@ pwm::~pwm() {
 
 // pec
 void pwm::set_duc(float duc) {
-    timer_set_oc_value(tim, TIM_OC1, int(duc * period));
+    timer_set_oc_value(tim, TIM_OC1, uint32_t((1-duc)*freq_to_ticks(freq)));
 }
 
-void pwm::set_period(uint32_t p) {
-    period = p;
-    timer_set_period(tim, period);
+void pwm::set_freq(uint32_t f) {
+    freq = f;
+    timer_set_period(tim, freq_to_ticks(f));
 }
 
 void pwm::start() {
@@ -42,4 +43,8 @@ void pwm::start() {
 
 void pwm::stop() {
     timer_disable_counter(tim);
+}
+
+uint32_t pwm::freq_to_ticks(uint32_t f) {
+    return uint32_t(clk / (freq*2));
 }

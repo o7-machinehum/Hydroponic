@@ -53,7 +53,7 @@ void cli_task(void * parameters) {
 int main(void) {
     clock_setup();
     uart* uart1 = new uart();
-    pwm* pump1  = new pwm(GPIOA, GPIO8, TIM1, 1000, .20);
+    pwm* pump1  = new pwm(GPIOA, GPIO8, TIM1, 1e4, 0.99, CLOCK);
     pump1->start();
 
     xTaskCreate(test_task,"demo", 128, NULL, 1, NULL);
