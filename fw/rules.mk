@@ -72,7 +72,7 @@ TGT_CFLAGS += $(ARCH_FLAGS)
 TGT_CFLAGS += -fno-common
 TGT_CFLAGS += -ffunction-sections -fdata-sections
 TGT_CFLAGS += -Wextra -Wshadow -Wno-unused-variable -Wimplicit-function-declaration
-TGT_CFLAGS += -Wredundant-decls -Wstrict-prototypes -Wmissing-prototypes
+TGT_CFLAGS += -Wredundant-decls -Wstrict-prototypes -Wmissing-prototypes -Wno-unused-parameter
 
 TGT_CPPFLAGS += -MD
 TGT_CPPFLAGS += -Wall -Wundef $(INCLUDES)
@@ -82,7 +82,7 @@ TGT_CPPFLAGS += $(OPT) $(CPPSTD) -ggdb3
 TGT_CPPFLAGS += $(ARCH_FLAGS)
 TGT_CPPFLAGS += -fno-common -fno-rtti
 TGT_CPPFLAGS += -ffunction-sections -fdata-sections
-TGT_CPPFLAGS += -Wextra -Wshadow -Wredundant-decls  -Weffc++
+TGT_CPPFLAGS += -Wextra -Wshadow -Wredundant-decls  -Weffc++ -Wno-unused-variable -Wno-unused-parameter 
 
 TGT_ASFLAGS += $(OPT) $(ARCH_FLAGS) -ggdb3
 

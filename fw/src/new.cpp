@@ -10,31 +10,33 @@ extern void HardFault_Handler();
 
 void error(void)
 {
-  while(1){
-    // NVIC_SystemReset(); 
-  }
+    while(1){
+        // NVIC_SystemReset(); 
+    }
 }
 
 // 
 // void vApplicationStackOverflowHook( TaskHandle_t xTask,
 //                                     signed char *pcTaskName )
 // {
-//   error();
+//     error();
 // }
 // 
 // void vApplicationMallocFailedHook()
 // {
-//   error();
+//     error();
 // }
 
 void* operator new( size_t size )
 {
-  void* out = pvPortMalloc( size ); 
+    void* out = pvPortMalloc( size ); 
 	
-  if(out)
-    return out;
-  else
-    error();
+    if(out)
+        return out;
+    else
+        error();
+    
+    return NULL; 
 }
 
 void operator delete( void * ptr )
