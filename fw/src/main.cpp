@@ -25,6 +25,9 @@ static void clock_setup(void)
     /* Enable clocks for GPIO port B (for GPIO_USART1_TX) and USART1. */
     rcc_periph_clock_enable(RCC_AFIO);
     rcc_periph_clock_enable(RCC_USART1);
+    
+    /* Timer clocks */
+    rcc_periph_clock_enable(RCC_TIM1);
 }
 
 void test_task(void * parameters) {

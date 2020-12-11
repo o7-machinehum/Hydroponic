@@ -7,9 +7,6 @@
 pwm::pwm(uint32_t port, uint16_t pin, uint32_t tim, uint32_t freq, float duc, uint32_t sysclk) 
 : tim(tim), freq(freq), clk(sysclk)
 {
-    rcc_periph_clock_enable(RCC_TIM1);
-    rcc_periph_clock_enable(RCC_GPIOA);
-     
     rcc_periph_clock_enable(RCC_AFIO);
     gpio_set_mode(port, GPIO_MODE_OUTPUT_50_MHZ, GPIO_CNF_OUTPUT_ALTFN_PUSHPULL, pin);
 
@@ -19,6 +16,7 @@ pwm::pwm(uint32_t port, uint16_t pin, uint32_t tim, uint32_t freq, float duc, ui
     timer_set_oc_mode(tim, TIM_OC1, TIM_OCM_PWM2);
     timer_enable_oc_output(tim, TIM_OC1);
     timer_enable_break_main_output(tim);
+
     set_duc(duc);
     set_freq(freq);
 }
@@ -27,7 +25,7 @@ pwm::~pwm() {
     stop();
 }
 
-// pec
+// pec duc
 void pwm::set_duc(float duc) {
     timer_set_oc_value(tim, TIM_OC1, uint32_t((1-duc)*freq_to_ticks(freq)));
 }
