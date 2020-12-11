@@ -5,11 +5,13 @@
 #include <libopencm3/stm32/flash.h>
 #include <libopencm3/stm32/gpio.h>
 #include <libopencm3/stm32/adc.h>
+#include <libopencm3/stm32/timer.h>
 
 #include "main.h"
 #include "cli.h"
 #include "hellocmd.h"
 #include "uart.h"
+#include "pwm.h"
 
 static void clock_setup(void)
 {
@@ -51,6 +53,8 @@ void cli_task(void * parameters) {
 int main(void) {
     clock_setup();
     uart* uart1 = new uart();
+    pwm* pump1  = new pwm(GPIOA, GPIO8, TIM1, 1000, .20);
+    pump1->start();
 
     xTaskCreate(test_task,"demo", 128, NULL, 1, NULL);
     xTaskCreate(cli_task, "cli" , 128, uart1, 1, NULL);
