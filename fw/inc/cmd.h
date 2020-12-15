@@ -7,6 +7,7 @@
 // #include "iomanip.h"
 class Cmd
 {
+    public:  // Remove me later
     friend class CLI;
 
     const char* name;

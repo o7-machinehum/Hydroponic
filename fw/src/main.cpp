@@ -10,6 +10,7 @@
 #include "main.h"
 #include "cli.h"
 #include "hellocmd.h"
+#include "pumpcmd.h"
 #include "uart.h"
 #include "pwm.h"
 
@@ -41,26 +42,32 @@ void test_task(void * parameters) {
 }
 
 void cli_task(void * parameters) {
-    auto uart1 = (uart *) parameters; 
-    CLI cli("CMD> ", uart1);
-
-    Cmd* menu[] = {
-        new HelloCmd("hello", uart1),
-        0
-    };
+    auto cli = (CLI *) parameters; 
     
     // Run the CLI
-    cli.present(menu);
+    cli->present();
 }
 
 int main(void) {
     clock_setup();
     uart* uart1 = new uart();
+
     pwm* pump1  = new pwm(GPIOA, GPIO8, TIM1, 1e4, 0.99, CLOCK);
+    pwm* pump2  = new pwm(GPIOA, GPIO0, TIM2, 1e4, 0.99, CLOCK);
+
     pump1->start();
 
-    xTaskCreate(test_task,"demo", 128, NULL, 1, NULL);
-    xTaskCreate(cli_task, "cli" , 128, uart1, 1, NULL);
+    Cmd* menu[] = {
+        new HelloCmd("hello", uart1),
+        new PumpCmd("pump", uart1, pump1, pump2),
+        new HelloCmd("hello2", uart1),
+        0
+    };
+
+    CLI* cli = new CLI("CMD> ", uart1, menu);
+
+    // xTaskCreate(test_task,"demo", 128, NULL, 1, NULL);
+    xTaskCreate(cli_task, "cli" , 128, cli, 1, NULL);
     vTaskStartScheduler();
 
     while(true);

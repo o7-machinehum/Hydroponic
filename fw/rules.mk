@@ -32,7 +32,7 @@
 # Second expansion/secondary not set, add this if you need them.
 
 BUILD_DIR ?= bin
-OPT ?= -Os
+OPT ?= -O0
 CSTD ?= -std=c99
 OOCD_FILE = openocd.cfg
 
