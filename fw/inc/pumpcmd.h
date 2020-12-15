@@ -10,7 +10,7 @@ class PumpCmd: public Cmd
     pwm*  pump2;
 
     virtual const char* parse(char* input){
-        uartx->send("Pump youself! \r\n");
+        uartx->send("Commands to control the system pumps\r\n");
         // uartx->send(input); 
         // uartx->send("\r\n");
         return(0);

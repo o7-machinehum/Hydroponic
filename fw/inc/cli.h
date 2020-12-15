@@ -15,6 +15,16 @@ class CLI
     CLI( const CLI& );            // non construction-copyable
     CLI& operator=( const CLI& ); // non copyable
 
+    void print_help(){
+        uartx->send("Help menu (help). For more info on each of the commands, just type their name\r\n");
+    
+        for(uint8_t k(0) ; k < num_commands ; k++) {
+            uartx->send("\t");
+            uartx->send(menu[k]->get_name());
+            uartx->send("\r\n");
+        }
+    }
+
 public:
     void present();
     CLI(const char *p, uart* u, Cmd** menu_st)
@@ -31,6 +41,8 @@ public:
         }
     }
 };
+
+
 
 void CLI::present(){
     char buf[80];
@@ -52,6 +64,18 @@ void CLI::present(){
                     break;
                 }
             }
+
+            // Does the user need help
+            bool help = false;
+            for(size_t i = 0 ; i < strlen("help") ; i++) {
+                if(buf[i] != "help"[i]){
+                    break;
+                    help = true;
+                }
+            }
+            if(help)
+                print_help();
+
 
             // Zero the shit out
             do {
@@ -77,5 +101,7 @@ void CLI::present(){
         }
     }
 }
+
+
 
 #endif

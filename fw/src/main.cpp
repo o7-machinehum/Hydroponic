@@ -60,7 +60,6 @@ int main(void) {
     Cmd* menu[] = {
         new HelloCmd("hello", uart1),
         new PumpCmd("pump", uart1, pump1, pump2),
-        new HelloCmd("hello2", uart1),
         0
     };
 

@@ -7,7 +7,6 @@
 // #include "iomanip.h"
 class Cmd
 {
-    public:  // Remove me later
     friend class CLI;
 
     const char* name;
@@ -28,6 +27,7 @@ class Cmd
     public:
     Cmd(const char* n):name(n){}
     virtual ~Cmd(){}
+    const char* get_name() { return name; };
 };
 
 #endif
