@@ -1,5 +1,4 @@
-#ifndef CMDPROC_H 
-#define CMDPROC_H
+#pragma once
 
 #include "cmd.h"
 #include "uart.h"
@@ -16,10 +15,10 @@ class CLI
     CLI& operator=( const CLI& ); // non copyable
 
     void print_help(){
-        uartx->send("Help menu (help). For more info on each of the commands, just type their name\r\n");
+        uartx->send("Help menu. For more info on each of the commands, just type their name with no argument\r\n");
     
         for(uint8_t k(0) ; k < num_commands ; k++) {
-            uartx->send("\t");
+            uartx->send("\t - ");
             uartx->send(menu[k]->get_name());
             uartx->send("\r\n");
         }
@@ -28,7 +27,7 @@ class CLI
 public:
     void present();
     CLI(const char *p, uart* u, Cmd** menu_st)
-    :prompt(p), uartx(u), num_commands(0)
+    :prompt(p), uartx(u), menu(NULL), num_commands(0)
     {
         while(menu_st[num_commands]) {
             num_commands++;
@@ -66,13 +65,14 @@ void CLI::present(){
             }
 
             // Does the user need help
-            bool help = false;
+            bool help = true;
             for(size_t i = 0 ; i < strlen("help") ; i++) {
                 if(buf[i] != "help"[i]){
+                    help = false;
                     break;
-                    help = true;
                 }
             }
+
             if(help)
                 print_help();
 
@@ -101,7 +101,3 @@ void CLI::present(){
         }
     }
 }
-
-
-
-#endif

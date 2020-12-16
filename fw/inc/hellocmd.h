@@ -1,5 +1,4 @@
-#ifndef HELLOCMD_H 
-#define HELLOCMD_H
+#pragma once
 
 #include "cmd.h"
 #include "uart.h"
@@ -21,5 +20,3 @@ class HelloCmd: public Cmd
     HelloCmd(const char* cmd_name, uart* u)
     :Cmd(cmd_name), uartx(u){}
 };
-
-#endif

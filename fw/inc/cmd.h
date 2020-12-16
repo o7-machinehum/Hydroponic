@@ -1,10 +1,6 @@
-#ifndef CMD_H 
-#define CMD_H
+#pragma once
 
 #include "string.h"
-#include "cli.h"
-// #include "iostream.h"
-// #include "iomanip.h"
 class Cmd
 {
     friend class CLI;
@@ -29,5 +25,3 @@ class Cmd
     virtual ~Cmd(){}
     const char* get_name() { return name; };
 };
-
-#endif

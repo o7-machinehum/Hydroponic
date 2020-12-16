@@ -1,5 +1,4 @@
-#ifndef PWM_H 
-#define PWM_H
+#pragma once
 
 #include <stdint.h>
 
@@ -19,4 +18,3 @@ public:
     void start();
     void stop();
 };
-#endif

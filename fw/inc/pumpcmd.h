@@ -1,7 +1,8 @@
-#ifndef PUMPCMD_H 
-#define PUMPCMD_H
+#pragma once
 
+#include "uart.h"
 #include "pwm.h"
+#include "cmd.h"
 
 class PumpCmd: public Cmd
 {
@@ -9,13 +10,12 @@ class PumpCmd: public Cmd
     pwm*  pump1;
     pwm*  pump2;
 
-    virtual const char* parse(char* input){
-        uartx->send("Commands to control the system pumps\r\n");
-        // uartx->send(input); 
-        // uartx->send("\r\n");
-        return(0);
+    void process(void);
+    virtual const char* parse(char* input)
+    {
+        return(process(input));
     }
-    
+
     PumpCmd( const PumpCmd& );            // non construction-copyable
     PumpCmd& operator=( const PumpCmd& ); // non copyable
     
@@ -23,5 +23,3 @@ class PumpCmd: public Cmd
     PumpCmd(const char* cmd_name, uart* u, pwm* pump1, pwm* pump2)
     :Cmd(cmd_name), uartx(u), pump1(pump1), pump2(pump2){}
 };
-
-#endif
