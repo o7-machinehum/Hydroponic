@@ -15,6 +15,7 @@ Please find the electronics files in the ee folder, all pcb design is done with
 the open source software KiCad. Is uses an STM32 as the main controller, and an
 ST L6470 moter driver for the stepper motor. There are various connectors for
 the subsystem components.  
+
     1. J1 - Aeration Pump (12V) 
     2. J2 - Watering Pump (12V) 
     3. J3 - LED Stepper 
