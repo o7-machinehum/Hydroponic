@@ -16,15 +16,8 @@ the open source software KiCad. Is uses an STM32 as the main controller, and an
 ST L6470 moter driver for the stepper motor. There are various connectors for
 the subsystem components.  
 
-    1. J1 - Aeration Pump (12V) 
-    2. J2 - Watering Pump (12V) 
-    3. J3 - LED Stepper 
-    4. J4 - LED (24v)
-    5. J5 - Misc (12V)
-    6. J6 - Misc (24V)
-    7. ?...?
-
-There are two front facing action buttons as well as a USB for device control.
+- Color Sensor
+    - TCS3472
 
 ## TODO
 - Make the PCB
@@ -63,4 +56,3 @@ Sourcing components for the build can be found in the supply folder.
 - https://www.uctronics.com/camera-modules/camera-multiplexer/arducam-multi-camera-adapter-module-v2-2-for-raspberry-pi-4-3b-3b-5mp-and-8mp-cameras-compatible-with-arducam-mipi-cameras.html
 
 - https://stereopi.com/
-
