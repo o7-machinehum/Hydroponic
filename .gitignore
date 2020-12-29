@@ -2,3 +2,9 @@ bin/
 *.elf
 *.bin
 generated.*.ld
+videos/*
+
+*.sch-bak
+*cache*
+*.kicad_pcb-bak
+*.sch-bak
