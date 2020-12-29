@@ -1,30 +1,25 @@
-# Hydrochronic
-(name) is the Arduino of hydroponics. It allows users to hack on using a
-raspberry pi. It gives the user control over...
+# The Robotanist 
+The Robotanist is a fully integrated hydroponic rig. It allows users to hack on
+using a raspberry pi. It gives the user control over...
     - Two pumps and their speeds
-    - Grow light and it's intensity
-    - Height of the light
-
-There is a web UI created through the custom Raspberry PI image, this allows
-control of the rig over phone or PC. It can also be fully controlled using
-python.
+    - The Grow lights intensity
+    - Height of the light, controlled with a stepper
 
 
 # Electronics
+![](ee/hydro/renders/board.png)
+
 Please find the electronics files in the ee folder, all pcb design is done with
 the open source software KiCad. Is uses an STM32 as the main controller, and an
 ST L6470 moter driver for the stepper motor. There are various connectors for
 the subsystem components.  
 
-- Color Sensor
-    - TCS3472
-
 ## TODO
-- Make the PCB
+- Finish Make the PCB
 
 
 # Firmware
-Please find the firmware files in the fw folder.  There is an STM32 running
+Please find the firmware files in the fw folder. There is an STM32 running
 FreeRTOS while using the libopencm3 HAL. The firmware has two main modes, 
 `command mode` and `autonomous mode`.
 
@@ -43,6 +38,8 @@ left for months.
 
 
 # Mechanical
+![](mech/part/export/cad.png)
+
 Please find the mechanical in the mech subfolder. All of the mechanical design
 is done us the open source software package FreeCAD (0.19). The design can be 3D
 printed.
