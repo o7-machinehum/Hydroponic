@@ -835,29 +835,29 @@ F 3 "~" H 2250 3800 50  0001 C CNN
 	1    2250 3800
 	1    0    0    -1  
 $EndComp
-Text Label 2700 3400 0    50   ~ 0
+Text Label 2750 3400 0    50   ~ 0
 PA1
-Text Label 2700 3500 0    50   ~ 0
+Text Label 2750 3500 0    50   ~ 0
 PA2
-Text Label 2700 3600 0    50   ~ 0
+Text Label 2750 3600 0    50   ~ 0
 PA3
-Text Label 2700 3700 0    50   ~ 0
+Text Label 2750 3700 0    50   ~ 0
 PA4
 Wire Wire Line
-	2550 3400 2700 3400
+	2600 3400 2750 3400
 Wire Wire Line
-	2700 3500 2550 3500
+	2750 3500 2600 3500
 Wire Wire Line
-	2550 3600 2700 3600
+	2600 3600 2750 3600
 Wire Wire Line
-	2700 3700 2550 3700
-Text Label 2700 4000 0    50   ~ 0
+	2750 3700 2600 3700
+Text Label 2750 4000 0    50   ~ 0
 UART_TX
 Wire Wire Line
-	2700 4000 2550 4000
+	2750 4000 2600 4000
 Wire Wire Line
-	2700 4100 2550 4100
-Text Label 2700 4100 0    50   ~ 0
+	2750 4100 2600 4100
+Text Label 2750 4100 0    50   ~ 0
 UART_RX
 $Comp
 L power:GND #PWR030
@@ -898,22 +898,94 @@ Wire Wire Line
 Text Label 5450 3400 0    50   ~ 0
 PA7
 Wire Wire Line
-	2550 3800 2700 3800
-Text Label 2700 3800 0    50   ~ 0
+	2600 3800 2750 3800
+Text Label 2750 3800 0    50   ~ 0
 PA6
 Wire Wire Line
-	2550 3900 2700 3900
-Text Label 2700 3900 0    50   ~ 0
+	2600 3900 2750 3900
+Text Label 2750 3900 0    50   ~ 0
 PA7
 $Comp
 L Switch:SW_Push SW1
 U 1 1 5FEF25E7
 P 7850 4350
 F 0 "SW1" H 7850 4635 50  0000 C CNN
-F 1 "SW_Push" H 7850 4544 50  0000 C CNN
+F 1 "Reset" H 7850 4544 50  0000 C CNN
 F 2 "Button_Switch_SMD:SW_SPST_PTS810" H 7850 4550 50  0001 C CNN
 F 3 "~" H 7850 4550 50  0001 C CNN
 	1    7850 4350
 	1    0    0    -1  
 $EndComp
+$Comp
+L Switch:SW_Push SW2
+U 1 1 5FF1DA6B
+P 5500 5200
+F 0 "SW2" H 5500 5485 50  0000 C CNN
+F 1 "Drain Tank" H 5500 5394 50  0000 C CNN
+F 2 "Button_Switch_SMD:Panasonic_EVQPUJ_EVQPUA" H 5500 5400 50  0001 C CNN
+F 3 "~" H 5500 5400 50  0001 C CNN
+F 4 "EVQ-PUA02K" H 5500 5200 50  0001 C CNN "Part Number"
+	1    5500 5200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW3
+U 1 1 5FF42F02
+P 5500 5700
+F 0 "SW3" H 5500 5985 50  0000 C CNN
+F 1 "Fill Tank" H 5500 5894 50  0000 C CNN
+F 2 "Button_Switch_SMD:Panasonic_EVQPUJ_EVQPUA" H 5500 5900 50  0001 C CNN
+F 3 "~" H 5500 5900 50  0001 C CNN
+F 4 "EVQ-PUA02K" H 5500 5700 50  0001 C CNN "Part Number"
+	1    5500 5700
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4000 4100 3750 4100
+Wire Wire Line
+	4000 4200 3750 4200
+Text Label 3750 4100 0    50   ~ 0
+Drain
+Text Label 3750 4200 0    50   ~ 0
+Fill
+Text Label 5000 5050 0    50   ~ 0
+Drain
+Text Label 5000 5550 0    50   ~ 0
+Fill
+Wire Wire Line
+	5000 5050 5000 5200
+Wire Wire Line
+	5000 5200 5300 5200
+Wire Wire Line
+	5000 5550 5000 5700
+Wire Wire Line
+	5000 5700 5300 5700
+Wire Wire Line
+	5700 5200 5900 5200
+Wire Wire Line
+	5900 5200 5900 5700
+Wire Wire Line
+	5700 5700 5900 5700
+Connection ~ 5900 5700
+Wire Wire Line
+	5900 5700 5900 6100
+$Comp
+L power:GND #PWR0103
+U 1 1 5FF92C70
+P 5900 6100
+F 0 "#PWR0103" H 5900 5850 50  0001 C CNN
+F 1 "GND" H 5905 5927 50  0000 C CNN
+F 2 "" H 5900 6100 50  0001 C CNN
+F 3 "" H 5900 6100 50  0001 C CNN
+	1    5900 6100
+	1    0    0    -1  
+$EndComp
+Text Label 1900 3500 2    50   ~ 0
+SWDIO
+Text Label 1900 3600 2    50   ~ 0
+SWDCLK
+Wire Wire Line
+	1900 3500 2050 3500
+Wire Wire Line
+	2050 3600 1900 3600
 $EndSCHEMATC

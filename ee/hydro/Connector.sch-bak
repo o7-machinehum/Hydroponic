@@ -35,7 +35,7 @@ AR Path="/6023EFBD" Ref="J?"  Part="1"
 AR Path="/60234C96/6023EFBD" Ref="J6"  Part="1" 
 F 0 "J6" H 6100 4750 50  0000 R CNN
 F 1 "Conn_01x04_Male" V 6063 4712 50  0001 R CNN
-F 2 "Connector_JST:JST_XH_S4B-XH-A_1x04_P2.50mm_Horizontal" H 6000 5000 50  0001 C CNN
+F 2 "Connector_JST:JST_XH_B4B-XH-A_1x04_P2.50mm_Vertical" H 6000 5000 50  0001 C CNN
 F 3 "~" H 6000 5000 50  0001 C CNN
 	1    6000 5000
 	-1   0    0    1   
@@ -450,18 +450,6 @@ F 3 "https://www.pololu.com/product/2982" H 5300 4550 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	5600 4750 5750 4750
-Wire Wire Line
-	5750 4750 5750 4800
-Wire Wire Line
-	5750 4800 5800 4800
-Wire Wire Line
-	5600 4850 5750 4850
-Wire Wire Line
-	5750 4850 5750 4900
-Wire Wire Line
-	5750 4900 5800 4900
-Wire Wire Line
 	5600 5050 5750 5050
 Wire Wire Line
 	5750 5050 5750 5000
@@ -615,4 +603,16 @@ Text Label 9900 1500 0    50   ~ 0
 LED_OUT
 Text Label 9850 2100 0    50   ~ 0
 LED_FB
+Wire Wire Line
+	5600 4750 5700 4750
+Wire Wire Line
+	5700 4750 5700 4900
+Wire Wire Line
+	5700 4900 5800 4900
+Wire Wire Line
+	5600 4850 5650 4850
+Wire Wire Line
+	5650 4850 5650 4800
+Wire Wire Line
+	5650 4800 5800 4800
 $EndSCHEMATC
