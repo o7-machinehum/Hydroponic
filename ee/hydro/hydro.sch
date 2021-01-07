@@ -835,29 +835,25 @@ F 3 "~" H 2250 3800 50  0001 C CNN
 	1    2250 3800
 	1    0    0    -1  
 $EndComp
-Text Label 2750 3400 0    50   ~ 0
+Text Label 3250 3400 0    50   ~ 0
 PA1
-Text Label 2750 3500 0    50   ~ 0
-PA2
-Text Label 2750 3600 0    50   ~ 0
+Text Label 3250 3950 0    50   ~ 0
 PA3
-Text Label 2750 3700 0    50   ~ 0
+Text Label 3250 4050 0    50   ~ 0
 PA4
 Wire Wire Line
-	2600 3400 2750 3400
+	3100 3400 3250 3400
 Wire Wire Line
-	2750 3500 2600 3500
+	3100 3950 3250 3950
 Wire Wire Line
-	2600 3600 2750 3600
-Wire Wire Line
-	2750 3700 2600 3700
-Text Label 2750 4000 0    50   ~ 0
+	3250 4050 3100 4050
+Text Label 3250 4350 0    50   ~ 0
 UART_TX
 Wire Wire Line
-	2750 4000 2600 4000
+	3250 4350 3100 4350
 Wire Wire Line
-	2750 4100 2600 4100
-Text Label 2750 4100 0    50   ~ 0
+	3250 4450 3100 4450
+Text Label 3250 4450 0    50   ~ 0
 UART_RX
 $Comp
 L power:GND #PWR030
@@ -898,12 +894,12 @@ Wire Wire Line
 Text Label 5450 3400 0    50   ~ 0
 PA7
 Wire Wire Line
-	2600 3800 2750 3800
-Text Label 2750 3800 0    50   ~ 0
+	3100 4150 3250 4150
+Text Label 3250 4150 0    50   ~ 0
 PA6
 Wire Wire Line
-	2600 3900 2750 3900
-Text Label 2750 3900 0    50   ~ 0
+	3100 4250 3250 4250
+Text Label 3250 4250 0    50   ~ 0
 PA7
 $Comp
 L Switch:SW_Push SW1
@@ -988,4 +984,20 @@ Wire Wire Line
 	1900 3500 2050 3500
 Wire Wire Line
 	2050 3600 1900 3600
+Wire Wire Line
+	4000 2700 3850 2700
+Text Label 3850 2700 2    50   ~ 0
+PB0
+Wire Wire Line
+	4000 2800 3850 2800
+Text Label 3850 2800 2    50   ~ 0
+PB1
+Wire Wire Line
+	2700 3400 2550 3400
+Text Label 2700 3400 0    50   ~ 0
+PB1
+Wire Wire Line
+	2700 3500 2550 3500
+Text Label 2700 3500 0    50   ~ 0
+PB0
 $EndSCHEMATC
