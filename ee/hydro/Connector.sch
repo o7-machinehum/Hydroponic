@@ -148,7 +148,7 @@ Wire Wire Line
 Connection ~ 2150 4200
 Wire Wire Line
 	2150 4200 2150 4100
-Text Notes 10400 1600 0    50   ~ 0
+Text Notes 10550 1600 0    50   ~ 0
 Grow Light\nConnection
 $Comp
 L power:+12V #PWR?
@@ -473,18 +473,6 @@ Wire Wire Line
 	4650 4950 4800 4950
 Wire Wire Line
 	4650 5050 4800 5050
-Text HLabel 4650 5250 0    50   Input ~ 0
-Mot_M0
-Wire Wire Line
-	4650 5250 4800 5250
-Text HLabel 4650 5350 0    50   Input ~ 0
-Mot_M1
-Text HLabel 4650 5450 0    50   Input ~ 0
-Mot_M2
-Wire Wire Line
-	4650 5350 4800 5350
-Wire Wire Line
-	4650 5450 4800 5450
 Text HLabel 4650 4450 0    50   Output ~ 0
 Mot_Flt
 Wire Wire Line
@@ -498,7 +486,7 @@ Wire Wire Line
 Wire Wire Line
 	4650 4550 4800 4550
 Wire Wire Line
-	5200 4250 5200 3950
+	5200 4250 5200 3600
 Wire Wire Line
 	5200 5650 5200 5800
 Wire Wire Line
@@ -528,14 +516,14 @@ Stepper\nConnection\n
 $Comp
 L power:+12V #PWR?
 U 1 1 5FF6D85B
-P 5200 3950
+P 5200 3500
 AR Path="/5FF6D85B" Ref="#PWR?"  Part="1" 
 AR Path="/60234C96/5FF6D85B" Ref="#PWR0102"  Part="1" 
-F 0 "#PWR0102" H 5200 3800 50  0001 C CNN
-F 1 "+12V" H 5215 4123 50  0000 C CNN
-F 2 "" H 5200 3950 50  0001 C CNN
-F 3 "" H 5200 3950 50  0001 C CNN
-	1    5200 3950
+F 0 "#PWR0102" H 5200 3350 50  0001 C CNN
+F 1 "+12V" H 5215 3673 50  0000 C CNN
+F 2 "" H 5200 3500 50  0001 C CNN
+F 3 "" H 5200 3500 50  0001 C CNN
+	1    5200 3500
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -615,4 +603,49 @@ Wire Wire Line
 	5650 4850 5650 4800
 Wire Wire Line
 	5650 4800 5800 4800
+$Comp
+L Device:CP1_Small C22
+U 1 1 6002E822
+P 5400 3800
+F 0 "C22" H 5491 3846 50  0000 L CNN
+F 1 "100uF" H 5491 3755 50  0000 L CNN
+F 2 "" H 5400 3800 50  0001 C CNN
+F 3 "~" H 5400 3800 50  0001 C CNN
+	1    5400 3800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5400 3700 5400 3600
+Wire Wire Line
+	5400 3600 5200 3600
+Connection ~ 5200 3600
+Wire Wire Line
+	5200 3600 5200 3500
+$Comp
+L power:GND #PWR?
+U 1 1 600352F6
+P 5400 3950
+AR Path="/600352F6" Ref="#PWR?"  Part="1" 
+AR Path="/60234C96/600352F6" Ref="#PWR06"  Part="1" 
+F 0 "#PWR06" H 5400 3700 50  0001 C CNN
+F 1 "GND" H 5405 3777 50  0001 C CNN
+F 2 "" H 5400 3950 50  0001 C CNN
+F 3 "" H 5400 3950 50  0001 C CNN
+	1    5400 3950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5400 3950 5400 3900
+Wire Wire Line
+	4650 5450 4800 5450
+Wire Wire Line
+	4650 5350 4800 5350
+Text HLabel 4650 5450 0    50   Input ~ 0
+Mot_M2
+Text HLabel 4650 5350 0    50   Input ~ 0
+Mot_M1
+Wire Wire Line
+	4650 5250 4800 5250
+Text HLabel 4650 5250 0    50   Input ~ 0
+Mot_M0
 $EndSCHEMATC
