@@ -2,6 +2,7 @@
 The Robotanist is a fully integrated hydroponic rig. 
 ![](mech/part/export/cad.png)
 
+Electronics
 ![](ee/hydro/renders/board.png)
 
 Please find the electronics files in the ee folder, all pcb design is done with
